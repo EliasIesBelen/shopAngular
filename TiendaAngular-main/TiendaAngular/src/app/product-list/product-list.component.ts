@@ -9,10 +9,22 @@ import { ProductAlertsComponent } from '../product-alerts/product-alerts.compone
   standalone: true,
   imports: [RouterLink, CommonModule, ProductAlertsComponent],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
   products = [...products];
+
+
+  getStockMessage(stock: number): string {
+    if (stock === 0) {
+      return 'Producto no disponible';
+    } else if (stock < 4) {
+      return `¡Solo quedan ${stock} unidades!`;
+    } else {
+      return `Disponibles ${stock} unidades`;
+    }
+  }
+
 
   share() {
     window.alert('The product has been shared!');

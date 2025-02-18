@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Product, products } from '../products';
@@ -9,12 +9,12 @@ import { CartService } from '../cart.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+  styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent {
   product: Product | undefined;
 
-  constructor(private route: ActivatedRoute, private cartService: CartService) { }
+  constructor(private route: ActivatedRoute, private cartService: CartService) {}
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
@@ -22,12 +22,9 @@ export class ProductDetailsComponent {
   }
 
   ngOnInit() {
-    // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = Number(routeParams.get('productId'));
-  
-    // Find the product that correspond with the id provided in route.
     this.product = products.find(product => product.id === productIdFromRoute);
   }
-
 }
+

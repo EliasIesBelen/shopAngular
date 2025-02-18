@@ -1,8 +1,18 @@
-<h2>Product Details</h2>
+<div *ngIf="product; else noProduct">
+  <h2>{{ product.name }}</h2>
+  <p><strong>Precio:</strong> ${{ product.price }}</p>
+  <p><strong>Descripción:</strong> {{ product.description || 'No disponible' }}</p>
+  <p><strong>Características:</strong></p>
+  <ul>
+    <li *ngFor="let caracteristica of product.caracteristicas">{{ caracteristica }}</li>
+  </ul>
+  <p><strong>Garantía:</strong> {{ product.garantia.periodo }} ({{ product.garantia.tipo }})</p>
+  
 
-<div *ngIf="product">
-  <h3>{{ product.name }}</h3>
-  <h4>{{ product.price | currency }}</h4>
-  <p>{{ product.description }}</p>
-  <button type="button" (click)="addToCart(product)">Buy</button>
+  <button (click)="addToCart(product)">Agregar al carrito</button>
 </div>
+
+
+<ng-template #noProduct>
+  <p>Producto no disponible.</p>
+</ng-template>
